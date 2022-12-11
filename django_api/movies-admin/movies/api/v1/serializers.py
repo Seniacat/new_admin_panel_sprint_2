@@ -32,9 +32,6 @@ class FilmworkSerializer(serializers.ModelSerializer):
         )
         model = Filmwork
 
-    def get_genres(self, movie):
-        return movie.genres
-
     def get_actors(self, movie):
         return movie.actors
 
