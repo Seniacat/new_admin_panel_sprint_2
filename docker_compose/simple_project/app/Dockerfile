@@ -1,6 +1,7 @@
 FROM python:3.10
 
-WORKDIR /opt/app
+ARG APP_HOME=/opt/app
+WORKDIR ${APP_HOME}
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
@@ -18,10 +19,15 @@ RUN  mkdir -p /var/www/static/ \
      && mkdir -p /opt/app/static/ \
      && mkdir -p /opt/app/media/ \
      && pip install --upgrade pip \
-     && pip install -r requirements.txt
+     && pip install -r requirements.txt \
+     && groupadd -r app && useradd -d ${APP_HOME} -r -g app app \
+     && chown app:app -R ${APP_HOME}
 
 COPY . .
 
 EXPOSE 8000
 
-ENTRYPOINT ["uwsgi", "--strict", "--ini", "uwsgi.ini"]
+USER app
+
+#ENTRYPOINT ["uwsgi", "--strict", "--ini", "uwsgi.ini"]
+CMD ["uwsgi", "--strict", "--ini", "uwsgi.ini"]

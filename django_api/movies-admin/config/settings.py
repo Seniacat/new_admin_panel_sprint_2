@@ -116,7 +116,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#Logging
+# Logging
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
@@ -146,7 +146,7 @@ LOGGING = {
     },
 }
 
-#Pagination
+# Pagination
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'movies.api.pagination.CustomPagination',
     'PAGE_SIZE': 50,

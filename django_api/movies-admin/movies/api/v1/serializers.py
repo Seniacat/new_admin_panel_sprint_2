@@ -1,15 +1,13 @@
-from django.db.models import Q
 from rest_framework import serializers
 from rest_framework.relations import StringRelatedField
 
-from movies.models import Filmwork, Person, PersonFilmwork
+from movies.models import Filmwork, Person
 
 
-class PersonSerializer(serializers.SlugRelatedField):    
+class PersonSerializer(serializers.SlugRelatedField):
     class Meta:
         model = Person
         fields = ('full_name',)
-
 
 
 class FilmworkSerializer(serializers.ModelSerializer):
@@ -17,6 +15,7 @@ class FilmworkSerializer(serializers.ModelSerializer):
     actors = serializers.SerializerMethodField()
     directors = serializers.SerializerMethodField()
     writers = serializers.SerializerMethodField()
+
     class Meta:
         fields = (
             'id',

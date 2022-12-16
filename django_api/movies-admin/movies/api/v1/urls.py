@@ -7,6 +7,6 @@ router = DefaultRouter()
 router.register('movies', views.MoviesViewSet)
 
 urlpatterns = [
-    #path('movies/', views.MoviesViewSet.as_view)
+    path('movies/', views.MoviesViewSet.as_view),
     path('', include(router.urls))
 ]
