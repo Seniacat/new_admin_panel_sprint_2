@@ -16,6 +16,8 @@ cd new_admin_panel_sprint_2/django_api
 ```
 Создайте и заполните .env файл с переменными окружения по примеру env.example:
 ```
+echo SECRET_KEY=xxxxx >> .env
+
 echo DB_ENGINE=django.db.backends.postgresql >> .env
 
 echo DB_NAME=postgres >> .env
