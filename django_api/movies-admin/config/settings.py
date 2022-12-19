@@ -30,8 +30,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'movies',
     'django_extensions',
-    'debug_toolbar',
+    'rest_framework',
 ]
+
+if DEBUG:
+    INSTALLED_APPS += ['debug_toolbar',]
 
 INTERNAL_IPS = os.getenv('INTERNAL_IPS').split(', ')
 
@@ -110,6 +113,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -139,7 +147,7 @@ LOGGING = {
     },
     'loggers': {
         'django.db.backends': {
-            'level': 'DEBUG',
+            'level': 'DEBUG' if DEBUG else 'INFO',
             'handlers': ['debug-console'],
             'propagate': False,
         }
@@ -149,5 +157,10 @@ LOGGING = {
 # Pagination
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'movies.api.pagination.CustomPagination',
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ],
     'PAGE_SIZE': 50,
 }
+
+LOCALE_PATHS = ['movies/locale']

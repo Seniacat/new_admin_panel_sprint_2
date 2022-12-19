@@ -1,10 +1,10 @@
 from django.contrib.postgres.aggregates import ArrayAgg
 from django.db.models import Q
-from rest_framework.viewsets import GenericViewSet
+from movies.models import Filmwork
 from rest_framework.mixins import ListModelMixin, RetrieveModelMixin
+from rest_framework.viewsets import GenericViewSet
 
 from .serializers import FilmworkSerializer
-from movies.models import Filmwork
 
 
 class MoviesViewSet(
@@ -12,7 +12,6 @@ class MoviesViewSet(
     ListModelMixin,
     GenericViewSet
 ):
-    queryset = Filmwork.objects.prefetch_related('genre', 'persons').all()
     serializer_class = FilmworkSerializer
 
     def aggregate_person(self, role: str):

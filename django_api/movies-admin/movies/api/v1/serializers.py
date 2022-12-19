@@ -1,13 +1,6 @@
+from movies.models import Filmwork
 from rest_framework import serializers
 from rest_framework.relations import StringRelatedField
-
-from movies.models import Filmwork, Person
-
-
-class PersonSerializer(serializers.SlugRelatedField):
-    class Meta:
-        model = Person
-        fields = ('full_name',)
 
 
 class FilmworkSerializer(serializers.ModelSerializer):
